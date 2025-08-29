@@ -21,9 +21,22 @@ Los estudiantes trabajarán en equipo, utilizando ramas, commits, Pull Requests 
 - `strings.xml`: Archivo de recursos de texto.
 - `develop` branch: Rama donde se integrarán las features antes de pasar a `main`.
 
-## 📝 Entrega
-Al finalizar:
-- Agrega en este README:
-    - Capturas de pantalla de la app funcionando.
-    - Explicación de cómo resolvieron los conflictos y organizaron el flujo de trabajo.
-    - Reflexión del equipo sobre lo aprendido.
+## Lecciones Aprendidas
+
+## Trabajo en Equipo
+
+Importancia de la comunicación clara en PRs
+Coordinación efectiva usando ramas de feature
+Revisiones de código constructivas
+
+## Desarrollo Técnico
+
+Implementación de Clean Architecture en Android
+Uso efectivo de Jetpack Compose para UI moderna
+Integración de sistema de navegación limpio y escalable
+
+## Git Flow
+
+Manejo profesional de ramas y merges
+Commits descriptivos siguiendo convenciones
+Resolución collaborative de conflictos
