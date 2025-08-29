@@ -1,5 +1,6 @@
 package com.uvg.teamapp.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -7,18 +8,20 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.uvg.teamapp.R
 import com.uvg.teamapp.data.repository.FakeTeamRepository
 import com.uvg.teamapp.model.TeamMember
 
-/**
- * Composable que muestra la lista de miembros usando LazyColumn.
- *
- */
 @Composable
 fun TeamListScreen(
     onMemberClick: (TeamMember) -> Unit = {},
@@ -27,47 +30,69 @@ fun TeamListScreen(
 ) {
     val teamMembers = remember { repository.getAllTeamMembers() }
 
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        TeamListHeader()
-        Spacer(modifier = Modifier.height(16.dp))
-        TeamMembersLazyColumn(
-            members = teamMembers,
-            onMemberClick = onMemberClick
+    Box(modifier = modifier.fillMaxSize()) {
+        // Background image
+        Image(
+            painter = painterResource(id = R.drawable.frutiger),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+
+        // Overlay for better text readability
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .alpha(0.1f)
+        )
+
+        // Content
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp)
+        ) {
+            Header()
+            Spacer(modifier = Modifier.height(24.dp))
+            TeamList(
+                members = teamMembers,
+                onMemberClick = onMemberClick
+            )
+        }
+    }
+}
+
+@Composable
+private fun Header() {
+    Column {
+        Text(
+            text = "Nuestro Equipo",
+            style = MaterialTheme.typography.headlineLarge,
+            fontWeight = FontWeight.Light,
+            color = Color(0xFF1976D2)
+        )
+
+        Text(
+            text = "Conoce a los miembros de nuestro equipo",
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Light,
+            color = Color(0xFF424242),
+            modifier = Modifier.padding(top = 4.dp)
         )
     }
 }
 
 @Composable
-private fun TeamListHeader() {
-    Text(
-        text = "Nuestro Equipo",
-        style = MaterialTheme.typography.headlineMedium,
-        fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.primary
-    )
-    Text(
-        text = "Conoce a los miembros de nuestro equipo de desarrollo",
-        style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        modifier = Modifier.padding(top = 4.dp)
-    )
-}
-
-@Composable
-private fun TeamMembersLazyColumn(
+private fun TeamList(
     members: List<TeamMember>,
     onMemberClick: (TeamMember) -> Unit
 ) {
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.fillMaxSize()
     ) {
         items(members) { member ->
-            TeamMemberCard(
+            MemberCard(
                 member = member,
                 onClick = { onMemberClick(member) }
             )
@@ -76,7 +101,7 @@ private fun TeamMembersLazyColumn(
 }
 
 @Composable
-private fun TeamMemberCard(
+private fun MemberCard(
     member: TeamMember,
     onClick: () -> Unit
 ) {
@@ -84,29 +109,34 @@ private fun TeamMemberCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() },
-        shape = RoundedCornerShape(12.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White.copy(alpha = 0.85f)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(20.dp)
         ) {
             Text(
                 text = member.name,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.primary
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF1976D2)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = member.description,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Light,
+                color = Color(0xFF424242),
                 maxLines = 3,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                lineHeight = MaterialTheme.typography.bodyMedium.lineHeight * 1.3
             )
         }
     }
