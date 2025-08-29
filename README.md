@@ -25,18 +25,18 @@ Los estudiantes trabajarán en equipo, utilizando ramas, commits, Pull Requests 
 
 ## Trabajo en Equipo
 
-Importancia de la comunicación clara en PRs
-Coordinación efectiva usando ramas de feature
-Revisiones de código constructivas
+- Importancia de la comunicación clara en PRs
+- Coordinación efectiva usando ramas de feature
+- Revisiones de código constructivas
 
 ## Desarrollo Técnico
 
-Implementación de Clean Architecture en Android
-Uso efectivo de Jetpack Compose para UI moderna
-Integración de sistema de navegación limpio y escalable
+- Implementación de Clean Architecture en Android
+- Uso efectivo de Jetpack Compose para UI moderna
+- Integración de sistema de navegación limpio y escalable
 
 ## Git Flow
 
-Manejo profesional de ramas y merges
-Commits descriptivos siguiendo convenciones
-Resolución collaborative de conflictos
+- Manejo profesional de ramas y merges
+- Commits descriptivos siguiendo convenciones
+- Resolución collaborative de conflictos
